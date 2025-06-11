@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Matematika Dasar</title>
+  <link rel="stylesheet" href="Style_mtk.css">
+  <link rel="script"
+</head>
+<body>
+  <p class="Hyperlink">
+    <a href="JZweb.html">🏠 Home</a>
+  </p>
+  <p class="Hyperlink">
+    <a href="kalkulator.html">🧮 Kalkulator</a>
+  </p>
+  
+  <form>
+    <fieldset>
+      <p class="kotak">Luas dan Keliling Lingkaran</p>
+      <label for="pi"><b>Jari-jari:</b></label>
+      <input type="number" id="pi" placeholder="Masukkan jari-jari"><br>
+      <div class="output" id="luas">Luas:</div>
+      <div class="output" id="keliling">Keliling:</div>
+      <button type="button" onclick="hitung()">Hitung</button>
+
+      <p class="kotak">Pythagoras</p>
+      <label for="a"><b>a:</b></label>
+      <input type="number" id="a" placeholder="Masukkan sisi a"><br>
+      <label for="b"><b>b:</b></label>
+      <input type="number" id="b" placeholder="Masukkan sisi b"><br>
+      <div class="output" id="hasilPitagoras">Panjang sisi miring (c):</div>
+      <button type="button" onclick="pitagoras()">Hitung</button>
+      
+      <p class="kotak">Hitung kecepatan</p>
+      <label for="jarak"><b>Jarak:</b></label>
+      <input type="number" id="jarak" placeholder="Masukan jarak"><br>
+      <label for="waktu"><b>waktu:</b></label>
+      <input type="number" id="waktu" placeholder="Masukan waktu"><br>
+       <div class="output" id="kecepatannyaadalah">kecepatan:</div>
+      <button type="button" onclick="kecepatan()">Hitung</button>
+    </fieldset>
+  </form>
+  <script src="Script_mtk.js"></script>
+</body>
+</html>
