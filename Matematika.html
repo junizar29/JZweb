@@ -4,11 +4,82 @@
   <meta charset="UTF-8">
   <title>Matematika Dasar</title>
   <link rel="stylesheet" href="Style_mtk.css">
-  <link rel="script"
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: black;
+      padding: 20px;
+    }
+
+    .kotak {
+      margin-top: 20px;
+      background-color: #b74b4b;
+      border-radius: 10px;
+      padding: 10px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .Hyperlink {
+      display: inline-block;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      background-color: #b74b4b;
+      padding: 10px 15px;
+    }
+    .Hyperlink:hover{
+      background-color: #a33d3d;
+      box-shadow: 0 0 25px #b74b4b;
+    }
+
+    .Hyperlink a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    fieldset {
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 5px;
+      margin-top: 5px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #b74b4b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b74b4b;
+    }
+
+    .output {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <p class="Hyperlink">
-    <a href="JZweb.html">🏠 Home</a>
+    <a href="index.html">🏠 Home</a>
   </p>
   <p class="Hyperlink">
     <a href="kalkulator.html">🧮 Kalkulator</a>
@@ -40,6 +111,42 @@
       <button type="button" onclick="kecepatan()">Hitung</button>
     </fieldset>
   </form>
-  <script src="Script_mtk.js"></script>
+  <script>
+    function hitung() {
+  var jariJari = parseFloat(document.getElementById("pi").value);
+  if (!isNaN(jariJari)) {
+  var luas = 3.14 * jariJari * jariJari;
+  var keliling = 2 * 3.14 * jariJari;
+  document.getElementById("luas").innerHTML = "Luas: " + luas.toFixed(2);
+  document.getElementById("keliling").innerHTML = "Keliling: " + keliling.toFixed(2);
+  } else {
+    document.getElementById("luas").innerHTML = "Luas: Masukkan nilai jari-jari!";
+    document.getElementById("keliling").innerHTML = "Keliling: Masukkan nilai jari-jari!";
+    
+  }
+  }
+
+ function pitagoras() {
+      var a = parseFloat(document.getElementById("a").value);
+      var b = parseFloat(document.getElementById("b").value);
+      if (!isNaN(a) && !isNaN(b)) {
+        var c = Math.sqrt(a * a + b * b);
+        document.getElementById("hasilPitagoras").innerHTML = "Panjang sisi miring (c): " + c.toFixed(2);
+      } else {
+        document.getElementById("hasilPitagoras").innerHTML = "Masukkan nilai a dan b!";
+      }
+    }
+function kecepatan(){
+  var jarak = parseFloat(document.getElementById("jarak").value);
+  var waktu = parseFloat(document.getElementById("waktu").value);
+  if (!isNaN(jarak) && !isNaN(waktu) && waktu != 0) {
+    let jam = waktu / 60;
+    var hasil = jarak / jam;
+    document.getElementById("kecepatannyaadalah").innerHTML = "Kecepatan: " + hasil.toFixed(2) + " km/jam";
+} else {
+    document.getElementById("kecepatannyaadalah").innerHTML = "Masukkan jarak dan waktu!";} 
+  }
+  
+  </script>
 </body>
 </html>

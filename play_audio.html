@@ -5,8 +5,300 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Music Player | Mas Dustin</title>
-  <link rel="stylesheet" href="style_audio.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    
+  }
+  *::before, *::after{
+    padding: 0;
+    margin: 0;
+  }
+  :root{
+    --pink: #ff74a4;
+    --violet: #9f6ea3;
+    --Lightblack: #515C6F;
+    --white: #ffffff;
+    --darkwhite: #cecaca;
+    --pinkshadow: #ffcbdd;
+    --Lightbshadow: rgba(0,0,0,0.15);
+    
+  }
+  body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: black;
+  }
+  .wrapper{
+    width: 380px;
+    padding: 25px 30px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 15px;
+    background: var(--white);
+    box-shadow: 0px 6px 15px var(--Lightbshadow);
+  }
+  .wrapper i{
+    cursor: pointer;
+  }
+  .top-bar, .progress-area .song-timer,
+  .controls, .music-list .header, .music-list ul li{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .top-bar i{
+    font-size: 30px;
+    color: var(--Lightblack);
+  }
+  .top-bar i:first-child{
+    margin-left: -7px;
+  }
+  .top-bar span{
+    font-size: 18px;
+    margin-left: -3px;
+    color: var(--Lightblack);
+  }
+  .img-area{
+    width: 100%;
+    height: 256px;
+    overflow: hidden;
+    margin-top: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 6px 12px var(--Lightbshadow);
+  }
+  .img-area img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+  }
+  .song-details{
+    text-align: center;
+    margin: 30px 0;
+    
+  }
+  .song-details p{
+    color: var(--Lightblack);
+    
+  }
+  .song-details .name{
+  font-size: 21px;
+  }
+  .song-details .artist{
+    font-size: 18px;
+    opacity: 0.9;
+    line-height: 35px;
+    
+  }
+  .progress-area{
+    height: 6px;
+    width: 100%;
+    border-radius: 50px;
+    background: #fefefe;
+    cursor: pointer;
+    
+  }
+  .progress-area .progress-bar{
+    height: inherit;
+    width: 0%;
+    position: relative;
+    border-radius: inherit;
+    background: #b74b4b;
+    
+  }
+  .progress-bar::before{
+    content: "";
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    top: 50%;
+    right: -5px;
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%);
+    background: inherit;
+    transition: opacity 0.2s ease;
+    
+  }
+  .progress-area:hover .progress-bar::before{
+    opacity: 1;
+    pointer-events: auto;
+    
+  }
+  .progress-area.song-timer{
+    margin-top: 2px;
+    
+  }
+  .song-timer span{
+    font-size: 13px;
+    color: var(--Lightblack);
+    
+  }
+  .controls{
+    margin: 40px 0 5px 0;
+    
+  }
+  .controls i{
+    font-size: 28px;
+    user-select: none;
+    background: #b74b4b;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+  }
+  .controls i:nth-child(2),
+  .controls :nth-child(4){
+    font-size: 43px;
+    
+  }
+  .controls #prev{
+    margin-right: -13px;
+    
+  }
+  .controls #next{
+    margin-left: -13px;
+  }
+  .controls .play-pause{
+    height: 54px;
+    width: 54px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(var(--white) 0%, var(--darkwhite) 100%);
+    box-shadow: 0px 0px 5px var(--pink);
+  }
+  .play-pause::before{
+    position: absolute;
+    content: "";
+    height: 43px;
+    width: 43px;
+    border-radius: inherit;
+    background: #b74b4b;
+  }
+  .play-pause i{
+    height: 43px;
+    width: 43px;
+    line-height: 43px;
+    text-align: center;
+    background: inherit;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: absolute;
+  }
+  .music-list{
+    position: absolute;
+    background: var(--white);
+    width: 100%;
+    left: 0;
+    bottom: -55%;
+    opacity: 0;
+    pointer-events: none;z-index: 5;
+    padding: 15px 30px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.1);
+    transition: all 0.15% ease-out;
+  }
+  .music-list.show{
+    bottom: 0;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .header .row{
+    display: flex;
+    align-items: center;
+    font-size: 19px;
+    color: var(--Lightblack);
+    cursor: default;
+  }
+  .header .row span{
+    margin-left: 5px;
+  }
+  .header #close{
+    font-size: 22px;
+    color: var(--Lightblack);
+  }
+  .music-list ul{
+    margin: 10px 0;
+    max-height: 260px;
+    overflow: auto;
+  }
+  .music-list ul::-webkit-scrollbar{
+    width: 0px;
+  }
+  .music-list ul li{
+    list-style: none;
+    display: flex;
+    cursor: pointer;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    color: var(--Lightblack);
+    border-bottom: 1px solid #E5E5E5;
+  }
+  .music-list ul li:last-child{
+    border-bottom: 0px;
+  }
+  .music-list ul li.row span{
+    font-size: 17px;
+  }
+  .music-list ul li.row p{
+    opacity: 0.9;
+  }
+  ul li .audio-duration{
+    font-size: 16px;
+  }
+  ul li.playing{
+    pointer-events: none;
+    color: var(--violet);
+  }
+  .music-item.playing {
+  background-color: #f0f0f0;
+  border-left: 4px solid #2196f3;
+}
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8rem;
+  background-color: black;
+}
+.btn {
+  display: inline-block;
+  padding: 0.5rem 0.5rem ;
+  background-color: #b74b4b;
+  border-radius: 3rem;
+  font-size: 20px;
+  color: white;
+  letter-spacing: 0.3rem;
+  font-weight: 20%;
+  border: 2px solid #b74b4b;
+  transition: 0.3s ease;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-left: 72%;
+  text-decoration: none;
+}
+
+.btn:hover {
+  transform: scale3d(1.03);
+  background-color: #a33d3d;
+  color: white;
+  box-shadow: 0 0 25px #b74b4b;
+}
+  </style>
 </head>
 <body>
   <div class="wrapper">
@@ -63,10 +355,239 @@
         <!-- Daftar lagu akan dimuat lewat JavaScript -->
       </ul>
     </div>
-    <a href="JZweb.html" class="btn"><h5>Home</h5></a>
+    <a href="index.html" class="btn"><h5>Home</h5></a>
   </div>
 
   <!-- Script JavaScript -->
-  <script src="Script_audio.js"></script>
+  <script>
+    // Tambahkan lagu baru dengan menyalin objek berikut dan tempelkan di dalam array
+let allMusic = [
+  {
+    name: "All the kids are debressed",
+    artist: "Jeremy Zucker",
+    img: "Jeremy-Zucker",
+    src: "all-the-kids"
+  },
+  {
+    name: "Nina",
+    artist: "Feast",
+    img: "nina",
+    src: "Nina_Feast"
+  },
+
+];
+
+// Pilih elemen-elemen dari DOM
+const wrapper = document.querySelector(".wrapper"),
+      musicImg = wrapper.querySelector(".img-area img"),
+      musicName = wrapper.querySelector(".song-details .name"),
+      musicArtist = wrapper.querySelector(".song-details .artist"),
+      playPauseBtn = wrapper.querySelector(".play-pause"),
+      prevBtn = wrapper.querySelector("#prev"),
+      nextBtn = wrapper.querySelector("#next"),
+      mainAudio = wrapper.querySelector("#main-audio"),
+      progressArea = wrapper.querySelector(".progress-area"),
+      progressBar = progressArea.querySelector(".progress-bar"),
+      musicList = wrapper.querySelector(".music-list"),
+      moreMusicBtn = wrapper.querySelector("#more-music"),
+      closeMoreMusic = musicList.querySelector("#close");
+
+let musicIndex = Math.floor((Math.random() * allMusic.length) + 1);
+let isMusicPaused = true;
+
+// Load lagu saat halaman dimuat
+window.addEventListener("load", () => {
+  loadMusic(musicIndex);
+  playingSong();
+});
+
+// Fungsi untuk memuat lagu
+function loadMusic(indexNumb) {
+  musicName.innerText = allMusic[indexNumb - 1].name;
+  musicArtist.innerText = allMusic[indexNumb - 1].artist;
+  musicImg.src = `${allMusic[indexNumb - 1].img}.jpg`;
+  mainAudio.src = `${allMusic[indexNumb - 1].src}.mp3`;
+}
+
+// Fungsi untuk memutar lagu
+function playMusic() {
+  wrapper.classList.add("paused");
+  playPauseBtn.querySelector("i").innerText = "pause";
+  mainAudio.play();
+}
+
+// Fungsi untuk menjeda lagu
+function pauseMusic() {
+  wrapper.classList.remove("paused");
+  playPauseBtn.querySelector("i").innerText = "play_arrow";
+  mainAudio.pause();
+}
+
+// Fungsi untuk lagu sebelumnya
+function prevMusic() {
+  musicIndex--;
+  if (musicIndex < 1) {
+    musicIndex = allMusic.length;
+  }
+  loadMusic(musicIndex);
+  playMusic();
+  playingSong();
+}
+
+// Fungsi untuk lagu selanjutnya
+function nextMusic() {
+  musicIndex++;
+  if (musicIndex > allMusic.length) {
+    musicIndex = 1;
+  }
+  loadMusic(musicIndex);
+  playMusic();
+  playingSong();
+}
+// play or pause button event
+playPauseBtn.addEventListener("click", () => {
+  const isMusicPlay = wrapper.classList.contains("paused");
+  // if isMusicPlay is true then pauseMusic else playMusic
+  isMusicPlay ? pauseMusic() : playMusic();
+  playingSong();
+});
+
+// prev music button event
+prevBtn.addEventListener("click", () => {
+  prevMusic();
+});
+
+// next music button event
+nextBtn.addEventListener("click", () => {
+  nextMusic();
+});
+
+// update progress bar width according to music current time
+mainAudio.addEventListener("timeupdate", (e) => {
+  const currentTime = e.target.currentTime;
+  const duration = e.target.duration;
+  let progressWidth = (currentTime / duration) * 100;
+  progressBar.style.width = `${progressWidth}%`;
+
+  let musicCurrentTime = wrapper.querySelector(".current-time"),
+      musicDuration = wrapper.querySelector(".max-duration");
+
+  // update song total duration
+  mainAudio.addEventListener("loadeddata", () => {
+    let mainAdDuration = mainAudio.duration;
+    let totalMin = Math.floor(mainAdDuration / 60);
+    let totalSec = Math.floor(mainAdDuration % 60);
+    if (totalSec < 10) {
+      totalSec = `0${totalSec}`;
+    }
+    musicDuration.innerText = `${totalMin}:${totalSec}`;
+  });
+
+  // update playing song current time
+  let currentMin = Math.floor(currentTime / 60);
+  let currentSec = Math.floor(currentTime % 60);
+  if (currentSec < 10) {
+    currentSec = `0${currentSec}`;
+  }
+  musicCurrentTime.innerText = `${currentMin}:${currentSec}`;
+});
+
+// update playing song currentTime according to the progress bar width
+progressArea.addEventListener("click", (e) => {
+  let progressWidth = progressArea.clientWidth;
+  let clickedOffsetX = e.offsetX;
+  let songDuration = mainAudio.duration;
+  mainAudio.currentTime = (clickedOffsetX / progressWidth) * songDuration;
+  playMusic();
+  playingSong();
+});
+
+// change loop, shuffle, repeat icon onclick
+const repeatBtn = wrapper.querySelector("#repeat-plist");
+repeatBtn.addEventListener("click", () => {
+  let getText = repeatBtn.innerText;
+  switch (getText) {
+    case "repeat":
+      repeatBtn.innerText = "repeat_one";
+      repeatBtn.setAttribute("title", "Song looped");
+      break;
+    case "repeat_one":
+      repeatBtn.innerText = "shuffle";
+      repeatBtn.setAttribute("title", "Playback shuffled");
+      break;
+    case "shuffle":
+      repeatBtn.innerText = "repeat";
+      repeatBtn.setAttribute("title", "Playlist looped");
+      break;
+  }
+});
+
+// show music list onclick of music icon
+moreMusicBtn.addEventListener("click", () => {
+  musicList.classList.toggle("show");
+});
+
+closeMoreMusic.addEventListener("click", () => {
+  moreMusicBtn.click();
+});
+
+const ulTag = wrapper.querySelector("ul");
+
+// create <li> tags for each song in the array
+for (let i = 0; i < allMusic.length; i++) {
+  let liTag = `<li li-index="${i + 1}">
+    <div class="row">
+      <span>${allMusic[i].name}</span>
+      <p>${allMusic[i].artist}</p>
+    </div>
+    <span id="${allMusic[i].src}" class="audio-duration">3:40</span>
+    <audio class="${allMusic[i].src}" src="songs/${allMusic[i].src}.mp3"></audio>
+  </li>`;
+  ulTag.insertAdjacentHTML("beforeend", liTag);
+
+  let liAudioDurationTag = ulTag.querySelector(`#${allMusic[i].src}`);
+  let liAudioTag = ulTag.querySelector(`.${allMusic[i].src}`);
+
+  liAudioTag.addEventListener("loadeddata", () => {
+    let duration = liAudioTag.duration;
+    let totalMin = Math.floor(duration / 60);
+    let totalSec = Math.floor(duration % 60);
+    if (totalSec < 10) {
+      totalSec = `0${totalSec}`;
+    }
+    liAudioDurationTag.innerText = `${totalMin}:${totalSec}`;
+    liAudioDurationTag.setAttribute("t-duration", `${totalMin}:${totalSec}`);
+  });
+}
+
+// function to highlight the playing song in the list
+function playingSong() {
+  const allLiTag = ulTag.querySelectorAll("li");
+
+  for (let j = 0; j < allLiTag.length; j++) {
+    let audioTag = allLiTag[j].querySelector(".audio-duration");
+
+    if (allLiTag[j].classList.contains("playing")) {
+      allLiTag[j].classList.remove("playing");
+      let adDuration = audioTag.getAttribute("t-duration");
+      audioTag.innerText = adDuration;
+    }
+
+    if (allLiTag[j].getAttribute("li-index") == musicIndex) {
+      allLiTag[j].classList.add("playing");
+      audioTag.innerText = "Playing";
+      allLiTag[j].setAttribute("onclick", "clicked(this)");
+    }
+  }
+}
+// particular li clicked function
+function clicked(element) {
+  let getLiIndex = element.getAttribute("li-index");
+  musicIndex = getLiIndex; // updating current song index with clicked li index
+  loadMusic(musicIndex);
+  playMusic();
+  playingSong();
+}
+  </script>
 </body>
 </html>
