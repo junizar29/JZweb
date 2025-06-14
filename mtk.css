@@ -1,0 +1,70 @@
+body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      padding: 20px;
+    }
+
+    .kotak {
+      margin-top: 20px;
+      background-color: #b74b4b;
+      border-radius: 10px;
+      padding: 10px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .Hyperlink {
+      display: inline-block;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      background-color: #b74b4b;
+      padding: 10px 15px;
+    }
+    .Hyperlink:hover{
+      background-color: #a33d3d;
+      box-shadow: 0 0 25px #b74b4b;
+    }
+
+    .Hyperlink a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    fieldset {
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 5px;
+      margin-top: 5px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #b74b4b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b74b4b;
+    }
+
+    .output {
+      margin-top: 10px;
+      font-weight: bold;
+    }
